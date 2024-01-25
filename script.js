@@ -1,9 +1,15 @@
-function beforesubmit(){
-    let outputdate = document.querySelector(".outputdate");
-    let inputdate = document.querySelector(".inputdate");
-    console.log("inputdate.value", inputdate.value); // this is string value. convert it to date
-    let formattedDate = new Date(inputdate.value).toLocaleDateString("en-AU");
-    outputdate.value=formattedDate;
+let captchachecked = false;
+function beforesubmit(event){
+    if (captchachecked){
+        let outputdate = document.querySelector(".outputdate");
+        let inputdate = document.querySelector(".inputdate");
+        console.log("inputdate.value", inputdate.value); // this is string value. convert it to date
+        let formattedDate = new Date(inputdate.value).toLocaleDateString("en-AU");
+        outputdate.value=formattedDate;
+    }else{
+        alert("please check the reCAPTCHA box to submit the lead!");
+        event.preventDefault();
+    }    
 }
 
 function timestamp() { 
@@ -15,3 +21,6 @@ function timestamp() {
     } 
 } 
 setInterval(timestamp, 500); 
+function captchasuccess(){
+    captchachecked = true;
+}
